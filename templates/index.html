@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Application</title>
+</head>
+
+<body>
+
+    <form action="/result" method="post">
+        <table border="2px">
+            <tr>
+                <th>index</th>
+                <th>year</th>
+                <th>Number_of_new_courses_intro</th>
+                <th>Number_of_Courses_offered</th>
+            </tr>
+            {% for index in range(1, 6) %}
+                <tr>
+                    <td><input type="number" name="values_index{{ index }}_index" required></td>
+                    <td><input type="text" pattern="\d{4}-\d{4}" title="Enter a valid year range (YYYY-YYYY)" name="values_index{{ index }}_year" required></td>
+                    <td><input type="number" name="values_index{{ index }}_Number_of_new_courses_intro" required></td>
+                    <td><input type="number" name="values_index{{ index }}_Number_of_Courses_offered" required></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <input type="Submit" value="Submit">
+    </form>
+
+</body>
+
+</html>

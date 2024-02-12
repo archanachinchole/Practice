@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Application - Results</title>
+    <script>
+        // Function to calculate the sum of a specific column
+        function calculateColumnSum(columnIndex) {
+            var rows = document.querySelectorAll('tr');
+            var sum = 0;
+
+            for (var i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+                var cells = rows[i].querySelectorAll('td');
+                var cellValue = parseInt(cells[columnIndex].innerText, 10);
+                sum += isNaN(cellValue) ? 0 : cellValue;
+            }
+
+            return sum;
+        }
+
+        // Function to update the sum in the HTML
+        function updateColumnSums() {
+            var sumNewCoursesIntro = calculateColumnSum(2); // Assuming "Number of New Courses Intro" is the third column (index 2)
+            var sumCoursesOffered = calculateColumnSum(3); // Assuming "Number of Courses Offered" is the fourth column (index 3)
+
+            document.getElementById('sumNewCoursesIntro').innerText = sumNewCoursesIntro;
+            document.getElementById('sumCoursesOffered').innerText = sumCoursesOffered;
+        }
+
+        // Call the updateColumnSums function when the page is loaded
+        window.onload = function () {
+            updateColumnSums();
+        };
+    </script>
+</head>
+
+<body>
+    <h1>Results</h1>
+
+    <table border="2px">
+        <tr>
+            <th>Index</th>
+            <th>Year</th>
+            <th>Number of New Courses Intro</th>
+            <th>Number of Courses Offered</th>
+        </tr>
+        {% for data in values %}
+            <tr>
+                <td>{{ data['index'] }}</td>
+                <td>{{ data['year'] }}</td>
+                <td>{{ data['Number_of_new_courses_intro'] }}</td>
+                <td>{{ data['Number_of_Courses_offered'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Result_1_2</h2>
+    <h2>Result_1_2 = round((Sum of Number of New Courses Intro / Sum of Number of Courses Offered) * 100, 2)</h2>
+    <p>{{ result }}</p>
+    <p>{{ result_1_2 }}</p>
+
+    <!-- Display the sum of "Number of New Courses Intro" and "Number of Courses Offered" columns -->
+    <p>Sum of Number of New Courses Intro: <span id="sumNewCoursesIntro"></span></p>
+    <p>Sum of Number of Courses Offered: <span id="sumCoursesOffered"></span></p>
+</body>
+
+</html>
